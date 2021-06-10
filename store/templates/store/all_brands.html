@@ -1,0 +1,36 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Custom css -->
+<link rel="stylesheet" href="{% static 'css/all_brands.css' %}">
+
+<div class="container my-4"">
+    <div class="am-sec-title mb-4">
+        <h2 class="text-center border-bottom pb-4 h4">
+            <span class="base-border">All Brands</span>
+        </h2>
+    </div>
+
+    {% if brands %}
+    <div class="all__brands">
+        {% for brand in brands %}
+        <a href="{% url 'store:brand_wise_product' brand.id %}">
+            <div class="card brand__card p-3">
+                <div class="brand__img">
+                    <img src="{{ brand.img.url }}" alt="">
+                </div>
+
+                <div class="brand__info text-center pt-3">
+                    <p class="text-dark">{{ brand.title }}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

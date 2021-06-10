@@ -1,0 +1,99 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+
+<div class="container my-5">
+    <div class="dashboard__content">
+        <!-- Dashboard sidebar starts -->
+        <div class="dashboard__sidebar">
+            <div class="card dashboard__card py-3">
+                <div class="dashboard__topContent">
+                    <span class="iconify dashboardUser__icon" data-icon="gridicons:user-circle" data-inline="false"></span>
+                    <h5 class="fw-bold">Wasek Samin</h5>
+                </div>
+                <div class="sidebar-widget-title py-0">
+                    <span>Menu</span>
+                </div>
+
+                <!-- Dashboard sidebar link starts -->
+                <div class="dashboard__links">
+                    <ul>
+                        <a class="text-muted" href="{% url 'store:dashboard' %}">
+                            <li>
+                                <span class="iconify icon" data-icon="clarity:dashboard-line" data-inline="false"></span> Dashboard
+                            </li>
+                        </a>
+                        <a class="text-muted" href="{% url 'store:wishlist' %}">
+                            <li class="activeDash">
+                                <span class="iconify" data-icon="ant-design:heart-outlined" data-inline="false"></span> Wishlist
+                            </li>
+                        </a>
+                        <a class="text-muted" href="{% url 'store:profile' %}">
+                            <li>
+                                <span class="iconify" data-icon="carbon:user" data-inline="false"></span> Manage Profile
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+                <!-- Dashboard sidebar link ends -->
+            </div>
+            <!-- Dashboard sidebar ends -->
+
+            <!-- Dashboard logout button starts -->
+            <button class="w-100 btn btn-block btn-danger logout__btn">Logout</button>
+            <!-- Dashboard logout button ends -->
+        </div>
+        <!-- Dashboard sidebar ends -->
+
+        <!-- Dashboard right side content starts -->
+        <div class="dashboard__Productcontainer">
+            <div class="wishlist__header mb-2">
+                <h5>Wishlist</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a class="text-dark" href="{% url 'store:home' %}"><small>Home</small></a></li>
+                      <li class="breadcrumb-item"><a class="text-dark" href="{% url 'store:dashboard' %}"><small>Dashboard</small></a></li>
+                      <li class="breadcrumb-item active" aria-current="page"><small>Wishlist</small></li>
+                    </ol>
+                </nav>
+            </div>
+            {% if all_products %}
+            <div class="product__category">
+                {% for item in all_products %}
+                <div class="card product__card {{ product.category.id }}">
+                    <div class="product__info card-body mb-2">
+                        <a class="text-dark" href="{% url 'store:product-detail' item.product.slug %}">
+                            <h5 class="product__title">{{ item.product.title }}</h5>
+                        </a>
+                        {% if item.product.sale_price %}
+                            <p><span class="text-muted cross__price">{{ item.product.market_price }}৳</span> <span>{{ item.product.sale_price }}৳</span></p>
+                            {% else %}
+                            <p>{{ item.product.market_price }}৳</p>
+                        {% endif %}
+                    </div>
+                    <div class="product__bottom card-footer">
+                        <button class="btn btn-danger">
+                            <span class="iconify remove__icon" data-icon="codicon:trash" data-inline="false"></span>
+                        </button>
+                        <a href="{% url 'store:product-detail' item.product.slug %}">
+                            <button class="btn__styled">View Details</button>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="card p-3 text-center">
+                <h5 class="text-muted">No product to show!</h5>
+            </div>
+            {% endif %}
+        </div>
+        <!-- Dashboard right side content ends -->
+    </div>
+</div>
+
+{% endblock %}

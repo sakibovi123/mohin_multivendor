@@ -1,0 +1,248 @@
+/* Categories show/hide starts */
+
+.categories,
+.img__slider {
+    display: none;
+}
+
+.categories.active {
+    display: flex;
+}
+
+/* Categories show/hide ends */
+
+
+/* Shop info -> title, image starts */
+
+.shop__info {
+    display: flex;
+    align-items: center;
+}
+
+/* Shop image starts */
+.shop__img {
+    width: 5rem;
+    height: 5rem;
+    margin-right: 1rem;
+}
+
+.shop__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Shop image ends */
+
+/* Shop title starts */
+.shop__title h5 {
+    font-family: var(--roboto);
+}
+/* Shop title ends */
+
+/* Shop verified sign starts */
+.shop__title .iconify {
+    width: 1.3rem;
+    height: 1.3rem;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--white-primary);
+}
+/* Shop verified sign ends */
+
+/* Shop info -> title, image starts */
+
+/* Shop sidebar starts */
+
+.shop__container {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-gap: 10px;
+}
+
+/* Shop sidebar starts */
+
+.shop__sidebar {
+    font-family: var(--roboto);
+}
+
+/* Shop sidebar card starts */
+.shop__card {
+    width: 100%;
+    height: auto;
+    border-radius: 0.3rem;
+}
+
+.shop__phone {
+    margin-top: 1rem;
+    margin-block-end: 0.5em;
+}
+
+.shop__card .iconify {
+    color: var(--primary-color);
+}
+/* Shop sidebar card ends */
+
+/* Shop sidebar ends */
+
+/* Shop product container starts */
+
+.shop__productContainer {
+    display: grid;
+    grid-template-columns: 32.65% 32.65% 32.65%;
+    grid-gap: 10px;
+}
+
+/* Shop product container header starts */
+.shop__contentHeader h5 {
+    font-family: var(--roboto);
+    font-weight: 600;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.3);
+}
+/* Shop product container header ends */
+
+
+/* Product card starts */
+.product__card {
+    border-radius: 0.3rem !important;
+    transition: box-shadow 0.2s;
+}
+
+.product__card:hover {
+    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+/* Product card ends */
+
+/* Product image starts */
+.product__img {
+    width: 100%;
+    height: auto;
+}
+
+.product__img img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.3rem !important;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+}
+/* Product image starts */
+
+/* Product info starts */
+.product__info {
+    padding: 0 10px;
+}
+
+/* Product description starts */
+.product__info .product__description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0.8rem;
+    margin-block-end: 0.2em;
+}
+/* Product description starts */
+
+/* Product title starts */
+.product__info .product__title {
+    font-family: var(--roboto);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.3rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+/* Product title ends */
+
+/* Product discount badge starts */
+
+.discount__badge {
+    font-family: var(--roboto);
+    font-size: 1rem;
+}
+
+/* Product discount badge ends */
+
+.cross__price {
+    text-decoration: line-through !important;
+    color: var(--gray-primary);
+}
+/* Product info ends */
+
+/* Product bottom part starts */
+.product__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 100%;
+    padding: 6px 10px;
+}
+
+.product__bottom p {
+    padding-top: 1rem;
+    font-family: var(--roboto);
+    color: var(--white-primary);
+    font-size: 1rem;
+}
+/* Product bottom part ends */
+
+/* Product card bottom part button starts */
+.btn__styled {
+    background-color: var(--white-primary);
+    color: var(--primary-color);
+    width: auto;
+    height: 2.5rem;
+    font-family: var(--roboto);
+    transition: background-color 0.3s;
+    border: none;
+    border-radius: 0.3rem;
+}
+
+.btn__styled:hover {
+    background-color: var(--muted-gray);
+}
+/* Product card bottom part button ends */
+
+/* Shop product container starts */
+
+
+/* Pagination starts */
+
+.pagination {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Pagination ends */
+
+
+/* Responsive starts */
+
+@media (max-width: 991px) {
+    .shop__sidebar {
+        display: none;
+    }
+    
+    .shop__container {
+        grid-template-columns: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .shop__productContainer {
+        grid-template-columns: 49% 49%;
+    }
+}
+
+@media (max-width: 400px) {
+    .shop__productContainer {
+        grid-template-columns: 100%;
+    }
+}
+
+/* Responsive ends */

@@ -1,0 +1,198 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
+
+<!-- Zoomsl for product magnify -->
+<script src="{% static 'js/zoomsl.min.js' %}" defer></script>
+
+<!-- Custom js -->
+<script src="{% static 'js/product_details.js' %}" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
+<link rel="stylesheet" href="{% static 'css/product_details.css' %}">
+
+
+<div class="singleProduct__container container my-4">
+    <div id="productsApp">
+    <div class="card p-3">
+        <div class="single__product">
+            <!-- Product image starts -->
+            <div class="singleProuct__img">
+                <div class="singleProduct__gallery">
+                    <img class="gallery_img activeImg" src="{{product.image.url}}" alt="">
+                </div>
+                <img class="main__img" src="{{product.image.url}}" alt="">
+            </div>
+            <!-- Product image ends -->
+
+            <!-- Product info starts -->
+            <div class="singleProduct__info">
+                <h5 class="fw-bold">{{ product.title }}</h5>
+                <small class="customer__reviews">
+                    <div class="customer__review">
+                        <span class="iconify text-muted" data-icon="akar-icons:star" data-inline="false"></span>
+                        <span class="iconify text-muted" data-icon="akar-icons:star" data-inline="false"></span>
+                        <span class="iconify text-muted" data-icon="akar-icons:star" data-inline="false"></span>
+                        <span class="iconify text-muted" data-icon="akar-icons:star" data-inline="false"></span>
+                        <span class="iconify text-muted last__star" data-icon="akar-icons:star" data-inline="false"></span>
+                    </div>
+                    <span class="text-muted show__customerReview">(0 Customer Reviews)</span>
+                </small>
+
+                <!-- Product price starts -->
+                <div class="product___price">
+
+                    {% if product.sale_price %}
+                        <p class="product__price fw-bold"><span>Price: </span><span class="cross__price text-muted">{{ product.market_price }}৳ </span><span class="product__Saleprice">{{ product.sale_price }}৳</span></p>
+                    {% else %}
+                        <p class="product__price fw-bold"><span>Price: </span><span class="product__Saleprice">{{ product.market_price }}৳</span></p>
+                    {% endif %}
+                </div>
+                <!-- Product price ends -->
+
+                <!-- Product add to cart button starts -->
+                <div class="product__cartBtn">
+                    <button  @click="addToCart({{product.id}})"><span class="iconify" data-icon="bx:bx-cart" data-inline="false"></span>ADD TO CART</button>
+                </div>
+                <!-- Product add to cart button ends -->
+
+                <hr>
+                <div class="return__policy">
+                    <small>Return Policy: </small>
+                    <small class="text-muted">Returns accepted if product not as described, buyer pays return shipping fee; or keep the product & agree refund with seller. <a href="#">View Details</a></small>
+                </div>
+                <hr>
+                <div class="secure__payment">
+                    <small>Secure Payment: </small>
+                    <img class="secure__img" src="{% static 'background_images/payment.png' %}" alt="">
+                </div>
+            </div>
+            <!-- Product info ends -->
+        </div>
+    </div>
+    </div>
+
+    <!-- Available shop starts -->
+    {% if product.shop %}
+    <div class="available__shops my-4">
+        <h5 class="mb-3">Available Shops</h5>
+        <div class="card p-3">
+            <div class="shop__image">
+                <img src="{{ product.shop.img.url }}" alt="">
+            </div>
+            <div class="shop__info text-center pt-2">
+                <h6 class="fw-bold">{{ product.shop.title }}</h6>
+                <span class="iconify phone__icon mb-3" data-icon="bx:bx-phone" data-inline="false"></span>
+            </div>
+            <div class="followBuy">
+                <a href="{% url 'store:shopwise-product' product.shop.id product.shop.title %}">
+                    <button class="follow__btn">View Shop</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- Available shop ends -->
+
+    <!-- Description and review starts -->
+    <div class="descriptionAndReviews mt-5">
+        <div class="description activeResource">
+            <h6 class="text-uppercase description__button">Description</h5>
+        </div>
+        <div class="reviews">
+            <h6 class="text-uppercase reviews__button">Reviews</h5>
+        </div>
+    </div>
+    <!-- Description and review starts -->
+    <hr>
+
+    <!-- Product description starts -->
+    <div class="Resources">
+        <div class="description__text">
+            {% if product.description %}
+            {{ product.description }}
+            {% endif %}
+        </div>
+        <div class="reviews__text text-center">
+            <p>There are no reviews for the product yet.</p>
+        </div>
+    </div>
+    <!-- Product description ends -->
+
+    <!-- Related products starts -->
+    <div class="related__products my-5">
+        <div class="am-sec-title mb-4">
+            <h2 class="text-center border-bottom pb-4 h4">
+                <span class="base-border">Related Products</span>
+            </h2>
+        </div>
+    </div>
+    <!-- Related products ends -->
+</div>
+
+
+<!--Vue js Script start-->
+
+<script>
+    var productApp = new Vue({
+    el: '#productsApp',
+    delimiters: ['[[', ']]'],
+    store: store,
+    data() {
+        return {
+
+        }
+    },
+
+    mounted() {
+        console.log("Mounted")
+    },
+    methods: {
+        added: function(event){
+            alert("Product Added To Cart");
+        },
+
+
+
+        addToCart(product_id) {
+            console.log("product_id:", product_id);
+
+            var data = { 'product_id': product_id, 'update': false, 'quantity': 1 };
+            store.commit('increament', 1);
+            fetch('/api/api_add_to_cart/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+
+            .catch(function(error) {
+                console.log("Error 2");
+                console.log(error)
+            })
+        },
+    },
+});
+
+</script>
+
+
+
+
+
+
+
+
+{% endblock %}

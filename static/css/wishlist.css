@@ -1,0 +1,237 @@
+/* Categories show/hide starts */
+
+.categories,
+.img__slider {
+    display: none;
+}
+
+.categories.active {
+    display: flex;
+}
+
+/* Categories show/hide ends */
+
+.dashboard__content {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+
+.dashboard__topContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard__card {
+    border-radius: 0.3rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.dashboardUser__icon {
+    width: 4rem;
+    height: 4rem;
+    color: var(--gray-primary);
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-widget-title {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.sidebar-widget-title span {
+    background: #fff;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    position: relative;
+    padding-left: 0.5rem;
+    color: var(--gray-primary);
+}
+
+.sidebar-widget-title::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: var(--gray-primary);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+}
+
+/* Dashboard sidebar links starts */
+.dashboard__links ul {
+    padding-left: 0 !important;
+}
+
+.dashboard__links ul li {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0s;
+}
+
+.dashboard__links ul a li {
+    font-family: var(--roboto);
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+}
+
+.dashboard__links ul a li .iconify {
+    margin-right: 0.5rem;
+}
+
+.activeDash {
+    background-color: var(--gray-primary);
+    border-left: 3px solid var(--primary-color);
+}
+
+.dashboard__links ul a li:hover {
+    background-color: var(--primary-color);
+}
+
+.dashboard__links ul a:hover li {
+    color: var(--white-primary) !important;
+}
+
+.dashboard__Productcontainer {
+    margin-left: 1rem;
+}
+/* Dashboard sidebar links ends */
+
+/* Dashboard sidebar logout button starts */
+
+.logout__btn {
+    border-radius: 0 !important;
+    font-family: var(--roboto);
+}
+
+/* Dashboard sidebar logout button ends */
+
+
+/* Profile header starts */
+
+.wishlist__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Profile header ends */
+
+/* Wishlist products starts */
+
+.product__category {
+    display: grid;
+    grid-template-columns: 32.65% 32.65% 32.65%;
+    grid-gap: 10px;
+}
+
+.product__card {
+    width: 100%;
+    height: auto;
+    border-radius: 0.3rem;
+    transition: box-shadow 0.2s;
+}
+
+.product__card:hover {
+    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.product__info {
+    padding: 0 10px;
+}
+
+.product__info .product__title {
+    font-family: var(--roboto);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.3rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.product__info p {
+    font-family: var(--roboto);
+    color: var(--primary-color);
+    font-size: 1rem;
+    color: var(--black-primary);
+    margin-block-end: 0;
+}
+
+.product__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--white-primary);
+    width: 100%;
+    padding: 6px 10px;
+}
+
+.cross__price {
+    text-decoration: line-through !important;
+}
+
+.remove__icon {
+    font-size: 1.2rem;
+}
+
+.btn__styled {
+    background-color: var(--primary-color);
+    color: var(--white-primary);
+    width: auto;
+    height: 2.5rem;
+    font-family: var(--roboto);
+    border: none;
+    border-radius: 0.3rem;
+    transition: background-color 0.3s;
+}
+
+.btn__styled:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Wishlist products ends */
+
+
+
+/* Responsive */
+
+@media (max-width: 991px) {
+    .product__category {
+        grid-template-columns: 49% 49%;
+    }
+}
+
+@media (max-width: 767px) {
+    .showcart {
+        display: none;
+    }
+    .dashboard__content {
+        grid-template-columns: 100%;
+    }
+
+    .dashboard__sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 575px) {
+    .product__category {
+        grid-template-columns: 100%;
+    }
+}
+
+@media (max-width: 359px) {
+    .wishlist__header {
+        display: block;
+    }
+}

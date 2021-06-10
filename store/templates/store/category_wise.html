@@ -1,0 +1,86 @@
+ {% extends "store/base.html" %}
+ {% load static %}
+
+ {% block content %}
+<!-- links-->
+
+<style type="text/css">
+    .card-box{
+        border-radius: 6px;
+    }
+</style>
+
+
+
+<div class="d-flex bd-highlight p-5">
+  <div class="col-sm-3 bg-white">
+      <ul class="list-group p-5">
+        {% for cat in cat_obj %}
+          <li class="list-group-item"><a href="{% url 'store:category_wise_product' cat.id %}" class="link-secondary" style="font-size: 14px;">{{cat.title}}</a>
+            <br>
+            <ul style="list-style-type: circle;">
+                {% for sub in cat.children.all %}
+                    <li>
+                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                        <a href="{% url 'store:category_wise_product' sub.id %}"><small style="font-size: 12px">{{sub.title}}</small></a></li>
+                {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+    </ul>
+
+  </div>
+
+  <!-- Product Base  -->
+  <div class="p-3 flex-fil p-4">
+        <div class="container">
+          <div class="row">
+            {% if prd_obj %}
+          {% for prd in prd_obj %}     
+              <div class="col">
+
+                <div class="container bg-white card-box w-100">
+
+                    <img src="{{prd.image.url}}" height=300 width=280 class="p-2" style="margin-left: 30px">
+                    <p class="p-4"><b>{{prd.title}}</b></p>
+                    <p>{{prd.description | safe}}</p>
+                    <hr>
+                    <div class="row p-2">
+                        {% if prd.sale_price %}
+                        <div class="col" style="text-align: center;">
+                            {{prd.sale_price}} $$
+                        </div>
+                        <div class="col" style="text-align: center;">
+                           <p><del>{{prd.market_price}}$$</del></p>
+                        </div>
+                        
+                        {% else %}
+                        <div class="col">
+                            {{prd.market_price}}
+                        </div>
+                        {% endif %}
+                        <hr>
+                        <br>
+                        <button class="btn btn-primary"><span class="iconify" data-icon="ant-design:shopping-cart-outlined" data-inline="false"></span>  Buy Now</button>
+                        <br>
+                    </div>
+                </div>
+              </div>
+              
+              
+          {% endfor %}
+          {% else %}<img src="{% static 'background_images/nothingfound.png' %}" >
+          {% endif %}
+              
+          </div>
+          
+        </div>
+  </div>
+  
+</div>
+ 
+
+
+
+
+ {% endblock %}

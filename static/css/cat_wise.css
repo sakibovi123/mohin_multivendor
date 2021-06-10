@@ -1,0 +1,39 @@
+.cat-container{
+    height: 400px;
+    width: 80%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.head{
+    height: 60px;
+    width: 100%;
+    background: #e8e8e8;
+}
+
+.head p {
+    font-size: 17px;
+    padding: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.cat-body ul {
+    padding: 10px;
+    margin: auto;
+    list-style-type: none;
+    border: 1px solid: #ddd;
+}
+
+.cat-body ul li{
+    padding: 6px;
+
+}
+@media screen and (max-width: 480px){
+.pagol{
+    display: none !important;
+}
+
+}
+

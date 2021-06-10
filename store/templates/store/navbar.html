@@ -1,0 +1,366 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+
+<!-- Jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
+
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
+<!-- Slick js library -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
+
+<!-- Custom js -->
+<script src={% static 'js/navbar.js' %} defer></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script type="text/javascript" src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
+
+<!-- Navbar for tab, and mobile starts -->
+<div class="tab__navbar">
+    <div class="nav__sidebarBG">
+        <div class="sidebar__nav">
+            <ul class="sidebar__topNavbar">
+                <span class="iconify cross__icon" data-icon="emojione-monotone:cross-mark" data-inline="false"></span>
+                <div class="sidebar__topContent">
+                    <span class="iconify user__icon" data-icon="gridicons:user-circle" data-inline="false"></span>
+                    <div class="user__login">
+                        <li class="user__signin">
+                            <a href="#">Sign In</a>
+                        </li>
+                        <li class="user__signup">
+                            <a href="#">Registration</a>
+                        </li>
+                    </div>
+                </div>
+            </ul>
+            <ul class="sidebar__navbarContent my-4">
+                <li>
+                    <a href="{% url 'store:home' %}">
+                        <span class="iconify icon" data-icon="ant-design:home-outlined" data-inline="false"></span> Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'store:dashboard' %}">
+                        <span class="iconify icon" data-icon="clarity:dashboard-line" data-inline="false"></span> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="iconify icon" data-icon="akar-icons:file" data-inline="false"></span> Purchase History
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="iconify icon" data-icon="icomoon-free:gift" data-inline="false"></span> Track Order
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="iconify icon" data-icon="akar-icons:arrow-cycle" data-inline="false"></span> Cashback
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="iconify icon" data-icon="bx:bx-cart" data-inline="false"></span> Cart <small class="cart__counter">([[numItems]])</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="iconify icon" data-icon="carbon:currency-dollar" data-inline="false"></span> My Adyan Balance
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="iconify icon" data-icon="carbon:user-filled" data-inline="false"></span> Manage Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="iconify icon" data-icon="whh:resellerhosting" data-inline="false"></span></span> Request As A Seller
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-widget-title py-0">
+                <span>Categories</span>
+            </div>
+            <ul class="sidebar__categories">
+                {% for category in categories %}
+                <li>
+                    <div class="cat__list">
+                        <a href="#">
+                            <img src="{{ category.img.url }}" alt=""> <span>{{ category.title }}</span>
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <nav class="navbar__tab container-fluid">
+        <ul class="logo__navbar">
+            <li>
+                <span class="iconify tab__hamburgerMenu" data-icon="system-uicons:menu-hamburger" data-inline="false"></span>
+            </li>
+            <li>
+                <a href="{% url 'store:home' %}">
+                    <img class="tab__logoImg" src="{% static 'logo_img/logo.png' %}" alt="">
+                </a>
+            </li>
+        </ul>
+
+        <ul class="tab__navItems">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="search__btn">
+                        <span
+                            class="iconify search__icon"
+                            data-icon="ant-design:search-outlined"
+                            data-inline="false">
+                        </span>
+                    </button>
+                </a>
+                <ul class="dropdown-menu tab__form" aria-labelledby="navbarDropdown">
+                    <form action="{% url 'store:search' %}" method="GET">
+                        <input type="text" name="query" value="{{ request.GET.query }}" id="" placeholder="Search...">
+                    </form>
+                </ul>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="nav-item dropdown login__userIcon">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span id="dashboard__icon"><i class="far fa-user"></i></span>
+
+                    <script>
+                        const dashboardIcon = document.getElementById("dashboard__icon");
+
+                        dashboardIcon.addEventListener("click", () => {
+                            window.location.href="/dashboard/";
+                        });
+                    </script>
+                </a>
+            </li>
+            {% endif %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="iconify ellipsis" data-icon="uil:ellipsis-v" data-inline="false"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="py-1"><a class="dropdown-item" href="#">All Shops</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'store:brands' %}">All Brands</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'store:campaigns' %}">Campaigns</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="#">Gift Cards</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'store:localshop' %}">Mustaqeem Localshop</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'store:flash-sale' %}">Flash Sale</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="#">COD Shops</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Navbar for tab, and mobile ends -->
+
+<!-- Top navbar starts -->
+<div class="top__bar bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+            {% if not request.user.is_authenticated %}
+            <li class="nav-item login__header top__header">
+                <span class="fw-bold text-dark">Hi!</span> <a href="{% url 'store:user_login' %}"><small>Sign in</small></a>
+            </li>
+            <li class="nav-item top__header login__header">
+                <span class="fw-bold text-dark">or</span> <a href="{% url 'store:user_registration' %}"><small>Register</small></a>
+            </li>
+            {% else %}
+            <li class="nav-item top__header logout__header">
+                <a href="{% url 'store:logout' %}"><small class="btn btn-link">Logout</small></a>
+            </li>
+            {% endif %}
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+            <li class="nav-item top__header">
+                <a class="nav-link" href="#"><small>Track Order</small></a>
+            </li>
+            <li class="nav-item cart__header me-2">
+                <a href="{% url 'cart_details' %}">
+                    <div id="navbarApp">
+                        <span class="iconify" data-icon="bx:bx-cart" data-inline="false"></span><span class="cart__counter">[[ numItems ]]</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item top__header">
+                <a href="#"><small>Request As A Seller</small></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Top navbar ends -->
+
+<!-- Main navbar starts -->
+<div class="main__navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'store:home' %}">
+                <div class="logo">
+                    <img src="{% static 'logo_img/logo.png' %}" alt="" />
+                </div>
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 main__navbarList">
+                    {% if main_navbarCat %}
+                        {% for category in main_navbarCat %}
+                            <li class="nav-item cat__list">
+                                <a class="nav-link" href="#">
+                                    {{ category.title }}
+                                </a>
+
+                                {% if subcategories %}
+                                    {% for subcategory in subcategories %}
+                                        {% if subcategory.parent_category.title == category.title %}
+                                            <ul class="subcategory__list">
+                                                {% for subcategory in subcategories %}
+                                                    {% if subcategory.parent_category.title == category.title %}
+                                                        <li class="sub__list">
+                                                            <a href="#">
+                                                                <small>{{ subcategory.title }}</small>
+                                                            </a>
+                                                        </li>
+                                                        {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </li>
+
+                        {% endfor %}
+
+
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- Main navbar ends -->
+
+<!-- All department, and searchbar part starts -->
+<div class="home__content">
+    <div class="container">
+        <div class="home__categoriesSearchBar">
+            <div class="all__departments">
+                <div class="all__departmentsHeader">
+                    <h6>All Categories</h6>
+                    <span class="iconify dropdownBtn" data-icon="bx:bx-chevron-down" data-inline="false"></span>
+                    {% if categories %}
+                    <div class="all__departmentsContent">
+                        {% for category in categories %}
+                            <ul class="category__list">
+                                <a href="#" class="text-dark">
+                                    <h6 class="fw-bold">{{ category.title }}</h6>
+                                </a>
+                                {% for subcategory in subcategories %}
+                                    {% if subcategory.parent_category.title == category.title %}
+                                        <li class="subcategory__list">
+                                            <a href="#">
+                                                <small>{{ subcategory.title }}</small>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
+
+
+            </div>
+            <form action="{% url 'store:search' %}" class="home__searchBar" method="GET">
+                <input type="text" value="{{ request.GET.query }}" name="query" id="search-input" placeholder="Search..." />
+                <button>
+                    <span
+                        class="iconify"
+                        data-icon="ant-design:search-outlined"
+                        data-inline="false">
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- All department, and searchbar part ends -->
+
+<!-- Show slider starts -->
+
+<!-- Banner slider -->
+{% if banners %}
+<div class="img__slider">
+    {% for banner in banners %}
+    <a href="#">
+        <img class="banner_img" src="{{ banner.image.url }}" alt="">
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+<!-- Banner slider ends -->
+
+<!-- Show slider ends -->
+
+<!-- Header after slider starts -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light d-flex justify-content-center header__afterSlider">
+    <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item after__slider">
+            <a class="nav-link" href="#">All Shops</a>
+        </li>
+        <li class="nav-item after__slider">
+            <a class="nav-link" href="{% url 'store:brands' %}">All Brands</a>
+        </li>
+        <li class="nav-item after__slider">
+            <a class="nav-link" href="{% url 'store:campaigns' %}">Campaigns</a>
+        </li>
+        <li class="nav-item after__slider">
+            <a class="nav-link" href="{% url 'store:localshop' %}">Mustaqeem Localshop</a>
+        </li>
+        <li class="nav-item after__slider">
+            <a class="nav-link" href="{% url 'store:flash-sale' %}">Flash Sale</a>
+        </li>
+        <li class="nav-item after__slider">
+            <a class="nav-link" href="#">COD Shops</a>
+        </li>
+    </ul>
+</nav>
+<!-- Header after slider starts -->
+
+<script>
+    
+    var store = new Vuex.Store({
+        state: {
+            numItems: {{ cart.get_total_length }}
+        },
+
+        mutations: {
+            increament(state, quantity) {
+                state.numItems += quantity;
+            }
+        }
+
+    });
+
+    var navbarApp = new Vue({
+        el: '#navbarApp',
+        delimiters: ["[[", "]]"],
+        store: store,
+        computed: {
+            numItems: function() {
+                return store.state.numItems
+            }
+        }
+
+    });
+
+</script>

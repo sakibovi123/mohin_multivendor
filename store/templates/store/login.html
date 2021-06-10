@@ -1,0 +1,44 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<style type="text/css">
+    @media screen and (max-width: 480px){
+    .img-container{
+        width: 340px;
+        padding: 5px;
+    }
+}
+</style>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <img src="{% static 'background_images/signup.jpg' %}" alt="" height=500px width=600px class="img-container">
+            </div>
+            <div class="col">
+                <div class="container">
+                    <form class="form-control p-5" action="" method="POST">
+                        {% csrf_token %}
+                        <h4 class="mt-3 p-2" style="text-align: center;">Login Now</h4>
+                        <label>Username</label></br>
+                        <input type="text" class="form-control" name="username" placeholder="Enter Username"></br>
+                        <label class="m-1">Password</label></br>
+                        <input type="password" class="form-control" name="password" placeholder="Enter Password">
+                        </br>
+                        <button type="submit" class="btn btn-success col-lg-12 mt-4">Login</button>
+                        </br>
+                        <p class="mt-3">Don't have an account?<a href="{% url 'store:user_registration' %}" style="color:red;">sign up now</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

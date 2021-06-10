@@ -1,0 +1,190 @@
+/* Categories show/hide starts */
+
+.categories,
+.img__slider {
+    display: none;
+}
+
+.categories.active {
+    display: flex;
+}
+
+/* Categories show/hide ends */
+
+
+/* Campaign title starts */
+.campaign__title h3 {
+    font-family: var(--roboto);
+    margin-bottom: 2rem;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.3);
+}
+/* Campaign title ends */
+
+/* Campaign product starts */
+
+.campaign__products {
+    display: grid;
+    grid-template-columns: 24.35% 24.35% 24.35% 24.35%;
+    grid-gap: 10px;
+}
+
+/* Campaign product card starts */
+.product__card {
+    border-radius: 0.3rem !important;
+    transition: box-shadow 0.2s;
+}
+
+.product__card:hover {
+    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+/* Campaign product card ends */
+
+/* Campaign product image starts */
+.product__img {
+    width: 100%;
+    height: auto;
+}
+
+.product__img img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.3rem !important;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+}
+/* Campaign product image ends */
+
+/* Campaign product info starts */
+.product__info {
+    padding: 0 10px;
+}
+
+/* Product description starts */
+.product__info .product__description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0.8rem;
+    margin-block-end: 0.2em;
+}
+/* Product description starts */
+
+/* Product title starts */
+.product__info .product__title {
+    font-family: var(--roboto);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.3rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+/* Product title ends */
+
+/* Product discount badge starts */
+
+.discount__badge {
+    font-family: var(--roboto);
+    font-size: 1rem;
+}
+
+/* Product discount badge ends */
+
+.cross__price {
+    text-decoration: line-through !important;
+    color: var(--gray-primary);
+}
+/* Campaign product info ends */
+
+/* Campign card bottom part starts */
+.product__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 100%;
+    padding: 6px 10px;
+}
+
+.product__bottom p {
+    padding-top: 1rem;
+    font-family: var(--roboto);
+    color: var(--white-primary);
+    font-size: 1rem;
+}
+/* Campign card bottom part ends */
+
+/* Campaign product bottom button starts */
+.btn__styled {
+    background-color: var(--white-primary);
+    color: var(--primary-color);
+    width: auto;
+    height: 2.5rem;
+    font-family: var(--roboto);
+    transition: background-color 0.3s;
+    border: none;
+    border-radius: 0.3rem;
+}
+
+.btn__styled:hover {
+    background-color: var(--muted-gray);
+}
+/* Campaign product bottom button ends */
+
+/* Campaign product ends */
+
+/* View all products button starts */
+.view__allProduct {
+    width: 10rem;
+    height: 3rem;
+    font-family: var(--roboto);
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: var(--white-primary);
+    border: none;
+    border-radius: 0.3rem;
+    transition: background-color 0.3s;
+}
+
+.view__allProduct:hover {
+    background-color: var(--primary-dark);
+}
+
+.view__allProduct:focus {
+    border: none;
+    outline: none;
+}
+/* View all products button ends */
+
+
+/* No campaign starts */
+.no-campaign {
+    font-family: var(--roboto);
+}
+/* No campaign ends */
+
+
+/* Responsive starts */
+
+@media (max-width: 1199px) {
+    .campaign__products {
+        grid-template-columns: 32.65% 32.65% 32.65%;
+    }
+}
+
+@media (max-width: 768px) {
+    .campaign__products {
+        grid-template-columns: 49% 49%;
+    }
+}
+
+@media (max-width: 400px) {
+    .campaign__products {
+        grid-template-columns: 100%;
+    }
+}
+
+
+/* Responsive ends */

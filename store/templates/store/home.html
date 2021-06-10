@@ -1,0 +1,245 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% load mathfilters %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+
+<!-- Jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
+
+<!-- Flicker slider css -->
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+<!-- Flicker slider js -->
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js" defer></script>
+
+<!-- custom js -->
+<script src={% static "js/home.js" %} defer></script>
+
+<div class="container my-4">
+    <!-- Services starts -->
+    <div class="card p-3">
+        <div class="services">
+            <div class="service">
+                <span class="iconify" data-icon="carbon:delivery-truck" data-inline="false"></span>
+                <p>Fastest Shipping</p>
+                <small>For all orders</small>
+            </div>
+            <div class="service">
+                <span class="iconify" data-icon="si-glyph:arrow-reload" data-inline="false"></span>
+                <p>100% Money back guarantee</p>
+                <small>30 Days money return</small>
+            </div>
+            <div class="service">
+                <span class="iconify" data-icon="simple-line-icons:support" data-inline="false"></span>
+                <p>Support 24/7</p>
+                <small>Hotline: 09613600900</small>
+            </div>
+            <div class="service">
+                <span class="iconify" data-icon="fluent:payment-28-regular" data-inline="false"></span>
+                <p>Safe Payment</p>
+                <small>Protect online Payment</small>
+            </div>
+        </div>
+    </div>
+    <!-- Services ends -->
+
+    <!-- Product by categories starts -->
+
+    {% if categories %}
+    <div class="product__byCategories my-5">
+        <div class="am-sec-title mb-4">
+            <h2 class="text-center border-bottom pb-4 h4">
+                <span class="base-border">Explore Categories</span>
+            </h2>
+        </div>
+        <div class="all__categories">
+            {% for category in categories %}
+                <div>
+                    <a href="{% url 'store:category_wise_product' category.id %}">
+                        <!-- Categories outside border card starts -->
+                        <div class="cat__card">
+                            <!-- Categories image card starts -->
+                            <div class="card">
+                                <!-- Categories image starts -->
+                                <div class="product__catImg">
+                                    <img src="{{ category.img.url }}" alt="">
+                                </div>
+                                <!-- Categories image ends -->
+                            </div>
+                            <!-- Categories image card ends -->
+                        </div>
+                        <!-- Categories outside border card ends -->
+
+                        <!-- Categories info starts -->
+                        <div class="product__catInfo text-center">
+                            <h5 class="fw-bold text-dark">{{ category.title }}</h5>
+                        </div>
+                        <!-- Categories info ends -->
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Product by categories ends -->
+
+    <!-- New arrival starts -->
+    <div class="new__arrival my-5">
+        <div class="am-sec-title mb-4">
+            <h2 class="text-center border-bottom pb-4 h4">
+                <span class="base-border">New Arrivals Of This Month</span>
+            </h2>
+        </div>
+
+        {% if products %}
+        <div class="offered__products">
+            {% for product in products %}
+            <div class="card product__card">
+                <div class="product__img">
+                    <a href="{% url 'store:product-detail' product.slug %}">
+                        <img src="{{ product.image.url }}" alt="">
+                    </a>
+                </div>
+
+
+
+                <div class="product__info card-body mb-2">
+                    <!-- Product description starts -->
+                    {% if product.description %}
+                        <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                            <p class="product__description text-muted">{{ product.description }}</p>
+                        </a>
+                    {% endif %}
+                    <!-- Product description ends -->
+
+                    <!-- Product title starts -->
+                    <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                        <h5 class="product__title">{{ product.title }}</h5>
+                    </a>
+                    <!-- Product title ends -->
+
+                    <!-- Product discount badge starts -->
+                    {% if product.sale_price %}
+                    <h5><span class="badge bg-danger discount__badge">{{ product.sale_price|div:product.market_price|mul:100|sub:100|abs|slugify|slice:":2" }}% OFF</span></h5>
+                    {% endif %}
+                    <!-- Product discount badge ends -->
+                </div>
+                <div class="product__bottom card-footer">
+                    {% if product.sale_price %}
+                        <p><span class="cross__price">{{ product.market_price }}৳</span> <span>{{ product.sale_price }}৳</span></p>
+                    {% else %}
+                        <p>{{ product.market_price }}৳</p>
+                    {% endif %}
+                    <a href="{% url 'store:product-detail' product.slug %}">
+                        <button class="btn__styled">View Details</button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="text-center my-5">
+            <a href="#">
+                <button class="view__allProduct">View All Products</button>
+            </a>
+        </div>
+    </div>
+    <!-- New arrival ends -->
+
+    <!-- Offer starts -->
+    <div class="offers">
+        {% if campaigns %}
+        <div class="campaign__offer">
+            <div class="offers__thumbnail">
+                <a href="#">
+                    <img src="{{ campaigns.img.url }}" alt="">
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {% if offers %}
+        <div class="offer">
+            <div class="offers__thumbnail">
+                <a href="#">
+                    <img src="{{ offers.offer_img.url }}" alt="">
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <!-- Offer ends -->
+
+    <!-- Hurry offer starts -->
+    <div class="hurry__offers my-5">
+        <div class="am-sec-title mb-4">
+            <h2 class="text-center border-bottom pb-4 h4">
+                <span class="base-border">Hurry Up! Special Offers</span>
+            </h2>
+        </div>
+
+        {% if all_products %}
+        <div class="offered__products">
+            {% for product in all_products %}
+            {% if product.sale_price %}
+            <div class="card product__card">
+                <div class="product__img">
+                    <a href="{% url 'store:product-detail' product.slug %}">
+                        <img src="{{ product.image.url }}" alt="">
+                    </a>
+                </div>
+
+                <div class="product__info card-body mb-2">
+                    {% if product.description %}
+                        <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                            <p class="product__description text-muted">{{ product.description }}</p>
+                        </a>
+                    {% endif %}
+                    <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                        <h5 class="product__title">{{ product.title }}</h5>
+                    </a>
+                    {% if product.sale_price %}
+                    <h5><span class="badge bg-danger discount__badge">{{ product.sale_price|div:product.market_price|mul:100|sub:100|abs|slugify|slice:":2" }}% OFF</span></h5>
+                    {% endif %}
+                </div>
+                <div class="product__bottom card-footer">
+                    {% if product.sale_price %}
+                    <p><span class="cross__price">{{ product.market_price }}৳</span> <span>{{ product.sale_price }}৳</span></p>
+                    {% else %}
+                    <p>{{ product.market_price }}৳</p>
+                    {% endif %}
+                    <a href="{% url 'store:product-detail' product.slug %}">
+                        <button class="btn__styled">View Details</button>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Hurry offer ends -->
+
+    <!-- All brands starts -->
+
+    {% if brands %}
+    <div class="brands my-5">
+        {% for brand in brands %}
+        <div class="brand__img">
+            <img src="{{ brand.img.url }}" alt="">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- All brands ends -->
+
+</div>
+{% endblock %}

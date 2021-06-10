@@ -1,0 +1,100 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
+
+<div class="container my-5">
+    <div class="dashboard__content">
+        <!-- Dashboard sidebar starts -->
+        <div class="dashboard__sidebar">
+            <div class="card dashboard__card py-3">
+                <div class="dashboard__topContent">
+                    <span class="iconify dashboardUser__icon" data-icon="gridicons:user-circle" data-inline="false"></span>
+                    <h5 class="fw-bold">{{ user.username }}</h5>
+                </div>
+                <div class="sidebar-widget-title py-0">
+                    <span>Menu</span>
+                </div>
+
+                <!-- Dashboard sidebar link starts -->
+                <div class="dashboard__links">
+                    <ul>
+                        <a class="text-muted" href="{% url 'store:dashboard' %}">
+                            <li class="activeDash">
+                                <span class="iconify icon" data-icon="clarity:dashboard-line" data-inline="false"></span> Dashboard
+                            </li>
+                        </a>
+                        <a class="text-muted" href="{% url 'store:wishlist' %}">
+                            <li>
+                                <span class="iconify" data-icon="ant-design:heart-outlined" data-inline="false"></span> Wishlist
+                            </li>
+                        </a>
+                        <a class="text-muted" href="{% url 'store:profile' %}">
+                            <li>
+                                <span class="iconify" data-icon="carbon:user" data-inline="false"></span> Manage Profile
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+                <!-- Dashboard sidebar link starts -->
+            </div>
+            <!-- Dashboard logout button starts -->
+            <a class="w-100 btn btn-block btn-danger logout__btn" href="{% url 'store:logout' %}">Logout</a>
+            <!-- dashboard logout button ends -->
+        </div>
+        <!-- Dashboard sidebar ends -->
+
+        <!-- Dashboard right side content starts -->
+        <div class="dashboard__dashboardContent">
+            <div class="dashboard__header mb-2">
+                <h5>Dashboard</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="text-dark" href="{% url 'store:home' %}"><small>Home</small></a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><small>Dashboard</small></li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="dashboard__table table-responsive">
+                {% for order in request.user.orders.all %}
+                <table class="table">
+                    <thead class="table-dark">
+                      <tr>
+                        <th scope="col" style="text-align: center;">Order ID</th>
+                        <th scope="col" style="text-align: center;">Product</th>
+                        <th scope="col" style="text-align: center;">Quantity</th>
+                        <th scope="col" style="text-align: center;">Price</th>
+                        <th scope="col" style="text-align: center;">Payment</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.items.all %}
+                        <tr>
+                        <th scope="row" style="text-align: center;">{{item.id}}</th>
+                        <td style="text-align: center;">{{item.product.title}}</td>
+                        <td style="text-align: center">{{item.quantity}}</td>
+                        {% if item.product.sale_price %}
+                        <td style="text-align: center;">{{item.product.sale_price}}</td>
+                        {% else %}
+                        <td style="text-align: center;">{{item.product.market_price}}</td>
+                        {% endif %}
+                        <td style="text-align: center;">
+                            <button class="btn btn-success">Make Payment</button>
+                        </td>
+                        </tr>
+                        {% endfor %}
+                    </tr>
+                    </tbody>
+                  </table>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Dashboard right side content ends -->
+    </div>
+</div>
+
+{% endblock %}

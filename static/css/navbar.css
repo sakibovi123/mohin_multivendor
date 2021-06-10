@@ -1,0 +1,722 @@
+.tab__navbar {
+    display: none;
+}
+
+.top__bar {
+    border-bottom: 1px solid var(--gray-primary);
+}
+
+/* Main navbar starts */
+.main__navbar {
+    background-color: var(--white-primary);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 998;
+}
+
+/* Main navbar category list starts */
+.main__navbarList {
+    position: relative;
+}
+
+/* Hide the subcategories by default */
+.main__navbarList .cat__list .subcategory__list {
+    display: none;
+}
+
+/* Show the subcategories if a category is hovered */
+.main__navbarList .cat__list:hover .subcategory__list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 1rem;
+    width: 100%;
+    height: 20rem;
+    overflow-y: hidden;
+    overflow-x: auto;
+    align-items: flex-start;
+    background-color: var(--white-primary);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    overflow-x: auto;
+}
+
+/* Scroll design starts */
+.main__navbarList .cat__list:hover .subcategory__list::-webkit-scrollbar {
+    width: 0.3rem;
+    height: auto;
+}
+.main__navbarList .cat__list:hover .subcategory__list::-webkit-scrollbar-button {
+    background: var(--white-primary);
+}
+.main__navbarList .cat__list:hover .subcategory__list::-webkit-scrollbar-track-piece {
+    background: var(--white-primary);
+}
+.main__navbarList .cat__list:hover .subcategory__list::-webkit-scrollbar-thumb {
+    background: var(--gray-primary);
+}
+/* Scroll design ends */
+
+/* Subcategory list starts */
+.sub__list {
+    padding: 5px 0;
+}
+
+.sub__list:hover {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.sub__list a small {
+    font-family: var(--roboto);
+    font-size: 0.9rem;
+}
+
+.sub__list a {
+    color: var(--black-primary);
+    transition: color 0.3s;
+    
+}
+
+.sub__list a:hover {
+    color: var(--primary-color);
+}
+/* Subcategory list ends */
+
+/* Main navbar category list starts */
+
+/* Main navbar ends */
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.logo {
+    width: 4rem;
+    height: 4rem;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-item a {
+    color: var(--black-primary) !important;
+    font-family: var(--roboto);
+    font-size: 1rem !important;
+    transition: color 0.3s;
+}
+
+.nav-item a:hover {
+    color: var(--primary-color) !important;
+}
+
+.navbar__icon a i {
+    font-size: 1.3rem !important;
+}
+
+.logout__header a .btn {
+    text-decoration: underline !important;
+}
+
+.top__header,
+.top__header a small {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+}
+
+.top__header a small:last-child {
+    color: var(--black-primary);
+    transition: color 0.3s;
+}
+
+.top__header a small:last-child:hover {
+    color: var(--primary-color);
+}
+
+.cart__header {
+    display: flex;
+    align-items: center;
+}
+
+.cart__header .cart__counter {
+    background-color: var(--primary-color);
+    color: var(--white-primary);
+    border-radius: 9999px;
+    padding: 0 8px;
+}
+
+.login__header {
+    margin-right: 0.2rem;
+}
+
+.login__header a small {
+    text-decoration: underline !important;
+}
+
+.tab__loginForm {
+    width: 25rem;
+}
+
+.tab__loginHeader h5 {
+    font-family: var(--roboto);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.tab__loginContent {
+    font-family: var(--roboto) !important;
+    padding: 0 10px;
+}
+
+.tab__loginContent .form-group {
+    margin-bottom: 1rem;
+}
+
+.rem__forgotPassword {
+    display: flex;
+    justify-content: space-between;
+}
+
+.forgot__password a {
+    color: var(--primary-color) !important;
+}
+
+.tab__loginButton {
+    margin-top: 1rem;
+    width: 100%;
+    height: 2.5rem;
+    background-color: var(--primary-color) !important;
+    color: var(--white-primary);
+    border: none;
+    border-radius: 0.3rem;
+    transition: background-color 0.3s;
+}
+
+.tab__loginButton:hover {
+    background-color: var(--primary-dark) !important;
+}
+
+.tab__loginButton:focus {
+    outline: none;
+    border: none;
+}
+
+a.register__now {
+    font-family: var(--roboto);
+    color: var(--primary-color) !important;
+    font-weight: bold;
+}
+
+
+/* all categories part */
+
+.home__content {
+    padding: 10px 0;
+    background-color: var(--primary-color);
+}
+
+.home__categoriesSearchBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.all__categories {
+    display: flex;
+    align-items: center;
+}
+
+.all__categories h5 {
+    font-family: var(--roboto);
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-top: 0.5rem;
+}
+
+/* All departments/categories section starts */
+.all__departments {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 43px;
+    flex: 0.3;
+    background-color: var(--white-primary);
+    border-radius: 9999px;
+    margin-right: 0.7rem;
+}
+
+.all__departmentsHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.all__departmentsHeader h6 {
+    margin-top: 6px;
+    padding-left: 10px;
+    font-family: var(--roboto);
+}
+
+.all__departmentsHeader .dropdownBtn {
+    padding-right: 10px;
+    font-size: 2rem;
+}
+
+.all__departmentsContent {
+    display: none;
+}
+
+.all__departments:hover .all__departmentsContent {
+    position: absolute;
+    padding-top: 1rem;
+    width: 65rem;
+    height: 26rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: var(--white-primary);
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    z-index: 100;
+    top: 100%;
+    left: 4%;
+}
+
+/* Scroll design starts */
+.all__departments:hover .all__departmentsContent::-webkit-scrollbar {
+    width: 0.3rem;
+    height: auto;
+}
+.all__departments:hover .all__departmentsContent::-webkit-scrollbar-button {
+    background: var(--white-primary);
+}
+.all__departments:hover .all__departmentsContent::-webkit-scrollbar-track-piece {
+    background: var(--white-primary);
+}
+.all__departments:hover .all__departmentsContent::-webkit-scrollbar-thumb {
+    background: var(--gray-primary);
+}
+/* Scroll design ends */
+
+.all__departmentsContent .category__list {
+    font-family: var(--roboto);
+}
+
+.all__departmentsContent .category__list h6:hover {
+    text-decoration: underline !important;
+}
+
+.all__departmentsContent .category__list .subcategory__list a {
+    padding-left: 1rem;
+    font-family: var(--roboto);
+    font-weight: normal;
+    color: var(--dark-gray);
+}
+
+.all__departmentsContent .category__list .subcategory__list a:hover {
+    color: var(--black-primary);
+}
+/* All departments/categories section ends */
+
+/* Header search bar starts */
+.home__searchBar {
+    display: flex;
+    align-items: center;
+    flex: 0.7;
+    border: 1px solid transparent;
+    height: 43px;
+    border-radius: 40px;
+    background-color: var(--white-primary);
+}
+
+.home__searchBar input {
+    flex: 1;
+    border: none;
+    padding: 0 10px;
+    outline: none;
+    margin-left: 10px;
+    font-family: var(--roboto);
+}
+
+.home__searchBar input::placeholder {
+    font-family: var(--roboto);
+}
+
+.home__searchBar button {
+    width: 35px!important;
+    height: 35px!important;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    margin-right: 5px;
+    color: var(--white-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+/* Header search bar ends */
+
+.categories__imgSlider {
+    display: flex;
+    height: auto;
+}
+
+/* Banner slider starts */
+
+.img__slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.img__slider img {
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 0!important;
+}
+
+/* Banner slider ends */
+
+/* Header after slider starts */
+
+.after__slider {
+    background-color: var(--primary-color);
+    border-radius: 9999px;
+    font-family: var(--roboto);
+    margin-right: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.after__slider:last-child {
+    margin-right: 0;
+}
+
+.after__slider:hover {
+    background-color: var(--primary-dark);
+}
+
+.after__slider a {
+    color: var(--white-primary) !important;
+}
+
+.after__slider a:hover {
+    color: var(--white-primary) !important;
+}
+
+/* Header after slider ends */
+
+@media screen and (max-width: 1199px) {
+    .all__departments:hover .all__departmentsContent {
+        width: 55rem;
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media (max-width: 991px) {
+    .tab__navbar {
+        display: block;
+        background-color: var(--white-primary);
+        z-index: 998;
+        position: sticky;
+        top: 0;
+        left: 0;
+        margin-bottom: 1rem;
+    }
+    .cat__list img {
+        width: 1rem;
+        height: 1rem;
+        object-fit: contain;
+    }
+    
+    .cat__list span {
+        font-family: var(--roboto);
+        font-size: 0.8rem;
+        padding-left: 6px;
+    }
+    /* Sidebar Navbar starts */
+    .nav__sidebarBG {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        background-color: rgba(0, 0, 0, 0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.3s;
+    }
+
+    .activeNavSidebarBG {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .sidebar__nav {
+        position: absolute;
+        top: 0;
+        left: -40rem;
+        width: 40%;
+        height: 100%;
+        background-color: var(--white-primary);
+        overflow-y: auto;
+        transition: left 0.3s;
+    }
+
+    .activeSidebarNav {
+        left: 0;
+    }
+
+    .sidebar__nav::-webkit-scrollbar {
+        width: 0.3rem;
+        height: auto;
+    }
+    .sidebar__nav::-webkit-scrollbar-button {
+        background: var(--white-primary);
+    }
+    ::-webkit-scrollbar-track-piece {
+        background: var(--white-primary);
+    }
+    .sidebar__nav::-webkit-scrollbar-thumb {
+        background: var(--gray-primary);
+    }
+
+    .sidebar__topNavbar {
+        background-color: var(--primary-color);
+        position: relative;
+    }
+    .cross__icon {
+        position: absolute;
+        top: 8%;
+        right: 3%;
+        color: var(--white-primary);
+        cursor: pointer;
+    }
+    .sidebar__topContent {
+        padding: 1rem 0;
+        padding-top: 1.5rem;
+    }
+    .user__icon {
+        width: 4rem;
+        height: 4rem;
+        color: var(--muted-gray);
+        margin-bottom: 1rem;
+    }
+    .user__login {
+        display: flex;
+        align-items: center;
+    }
+    .user__signin {
+        padding-right: 0.5rem;
+        border-right: 2px solid var(--gray-primary);
+    }
+    .user__signup {
+        padding-left: 0.5rem;
+    }
+    .user__signin a,
+    .user__signup a {
+        color: var(--white-primary) !important;
+        font-family: var(--roboto);
+        font-weight: 500;
+    }
+    .sidebar__navbarContent li a {
+        display: flex;
+        align-items: center;
+        font-family: var(--roboto);
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 6px 0;
+        color: var(--dark-primary);
+    }
+    .sidebar__navbarContent li a .icon {
+        color: var(--primary-color);
+        margin-right: 1rem;
+    }
+    .sidebar-widget-title {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+    .sidebar-widget-title span {
+        background: #fff;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        position: relative;
+        padding-left: 2rem;
+        color: var(--gray-primary);
+    }
+    .sidebar-widget-title::before {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background: var(--gray-primary);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+    }
+
+    .cart__counter {
+        padding: 0 10px;
+        background-color: var(--primary-color);
+        color: var(--white-primary);
+        border-radius: 9999px;
+    }
+    /* Sidebar Navbar ends */
+    .top__bar,
+    .main__navbar {
+        display: none;
+    }
+    .home__content,
+    .home__categories,
+    .home__searchBar {
+        display: none;
+    }
+    .categories {
+        display: none;
+    }
+    .img__slider {
+        flex: 1;
+    }
+    .tab__navbar a {
+        color: var(--dark-primary);
+    }
+    .navbar__tab {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo__navbar {
+        display: flex;
+        align-items: center;
+    }
+    .tab__hamburgerMenu {
+        font-size: 2rem;
+        cursor: pointer;
+    }
+    .tab__logoImg {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .tab__navItems {
+        display: flex;
+        align-items: center;
+    }
+    .tab__navbar .far,
+    .tab__navbar .ellipsis {
+        font-size: 1.2rem;
+    }
+    .tab__navItems li button {
+        border: none;
+        background-color: transparent;
+    }
+    .tab__navItems .search__icon {
+        font-size: 1.3rem;
+    }
+    .dropdown-menu li:hover,
+    .dropdown-menu li a:hover {
+        background-color: var(--muted-gray);
+    }
+    .tab__navItems li:hover {
+        color: var(--primary-color);
+    }
+    .tab__form {
+        width: 20rem;
+    }
+    .tab__form form {
+        display: flex;
+        align-items: center;
+    }
+    .tab__form form input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        padding: 6px 10px;
+        font-size: 1rem;
+        font-family: var(--roboto);
+    }
+    .tab__form form input:focus {
+        outline: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar__nav {
+        width: 70%;
+    }
+}
+
+@media (max-width: 500px) {
+    .img__slider img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    .tab__loginForm {
+        width: 20rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .tab__form {
+        width: 15rem;
+    }
+}
+
+@media (max-width: 340px) {
+    .tab__navbar .far,
+    .tab__navbar .ellipsis {
+        font-size: 1rem;
+    }
+    .tab__loginForm {
+        width: 15rem;
+    }
+    .topbar__remCheck {
+        font-size: 0.7rem;
+    }
+    .forgot__password a {
+        font-size: 0.7rem !important;
+    }
+    .need__account {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 335px) {
+    .tab__hamburgerMenu {
+        font-size: 1.5rem;
+    }
+    .tab__logoImg {
+        width: 3rem;
+        height: 3rem;
+    }
+    .tab__form {
+        width: auto;
+    }
+}
+
+@media (max-width: 329px) {
+    .sidebar__nav {
+        width: 100%;
+    }
+}
+
+@media (max-width: 310px) {
+    .tab__logoImg {
+        width: 2rem;
+        height: 2rem;
+    }
+}

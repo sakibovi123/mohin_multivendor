@@ -1,0 +1,84 @@
+{% extends "store/base.html" %}
+
+{% load mathfilters %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/campaigns.css' %}">
+
+<div class="campaigns__container container my-5">
+    <!-- All offers starts -->
+    {% if offers %}
+    <div class="campaigns">
+        {% for offer in offers %}
+        <div class="campaign__title text-center my-5">
+            <h3 class="text-capitalize fw-bold">{{ offer.offer_title }}</h3>
+        </div>
+        <!-- Offer product starts -->
+        <div class="campaign__products">
+            {% for product in products %}
+            {% if product.flash_sale_offer.offer_title == offer.offer_title %}
+            <div class="card product__card">
+                <div class="product__img">
+                    <a href="{% url 'store:product-detail' product.slug %}">
+                        <img src="{{ product.img.url }}" alt="">
+                    </a>
+                </div>
+
+                <div class="product__info card-body mb-2">
+                    <!-- Product description starts -->
+                    {% if product.description %}
+                        <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                            <p class="product__description text-muted">{{ product.description }}</p>
+                        </a>
+                    {% endif %}
+                    <!-- Product description ends -->
+
+                    <!-- Product title starts -->
+                    <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                        <h5 class="product__title">{{ product.title }}</h5>
+                    </a>
+                    <!-- Product title ends -->
+
+                    <!-- Product discount badge starts -->
+                    {% if product.sale_price %}
+                            <h5><span class="badge bg-danger discount__badge">{{ product.sale_price|div:product.market_price|mul:100|sub:100|abs|slugify|slice:":2" }}% OFF</span></h5>
+                    {% endif %}
+                    <!-- Product discount badge ends -->
+                </div>
+                <div class="product__bottom card-footer">
+                    {% if product.sale_price %}
+                    <p><span class="cross__price">{{ product.market_price }}৳</span> <span>{{ product.sale_price}}৳</span></p>
+                    {% else %}
+                    <p>{{ product.market_price }}৳</p>
+                    {% endif %}
+                    <a href="{% url 'store:product-detail' product.slug %}">
+                        <button class="btn__styled">View Details</button>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Offer product ends -->
+
+        <!-- View more button starts -->
+        <div class="text-center my-5">
+            <a href="#">
+                <button class="view__allProduct">View All Products</button>
+            </a>
+        </div>
+        <!-- View more button ends -->
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center">
+        <h5 class="fw-bold no-campaign">There is no flash sale available for now!</h5>
+    </div>
+    <!-- All offers ends -->
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/shopwise_product.css' %}">
+
+<div class="container mt-5">
+    <div class="shop__info">
+        <div class="shop__img">
+            <img src="{{ shop.img.url }}" alt="">
+        </div>
+        <div class="shop__title">
+            <h5 class="fw-bold">{{ shop.title }} <span class="iconify" data-icon="teenyicons:tick-outline" data-inline="false"></span></h5>
+        </div>
+    </div>
+</div>
+<hr/>
+<div class="container my-5">
+    <div class="shop__container">
+        <div class="shop__sidebar">
+            <div class="card shop__card p-3">
+                <h5>{{ shop.title }}</h5>
+                <p class="shop__phone text-muted"><span class="iconify" data-icon="bx:bx-phone" data-inline="false"></span> {% if shop.phone_no %}{{ shop.phone_no }}{% endif %}</p>
+                <p class="text-muted"><span class="iconify" data-icon="bi:map" data-inline="false"></span> {% if shop.address %}{{ shop.address }}{% endif %}</p>
+            </div>
+        </div>
+
+        {% if products %}
+        <div class="shop__content">
+            <div class="shop__contentHeader mb-3">
+                <h5>New Arrival Products</h5>
+                <hr class="mb-4" />
+            </div>
+            <div class="shop__productContainer">
+                {% for product in page_obj %}
+                <div class="card product__card">
+                    <div class="product__img">
+                        <a href="{% url 'store:product-detail' product.slug %}">
+                            <img src="{{ product.img.url }}" alt="">
+                        </a>
+                    </div>
+
+                    <div class="product__info card-body mb-2">
+                        <!-- Product description starts -->
+                        {% if product.description %}
+                        <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                            <p class="product__description text-muted">{{ product.description }}</p>
+                        </a>
+                        {% endif %}
+                        <!-- Product description ends -->
+
+                        <!-- Product title starts -->
+                        <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                            <h5 class="product__title">{{ product.title }}</h5>
+                        </a>
+                        <!-- Product title ends -->
+
+                        <!-- Product discount badge starts -->
+                        {% if product.sale_price %}
+                            <h5><span class="badge bg-danger discount__badge">{{ product.sale_price|div:product.market_price|mul:100|sub:100|abs|slugify|slice:":2" }}% OFF</span></h5>
+                        {% endif %}
+                        <!-- Product discount badge ends -->
+                    </div>
+                    <div class="product__bottom card-footer">
+                        {% if product.sale_price %}
+                        <p><span class="cross__price">{{ product.market_price }}৳</span> <span>{{ product.sale_price }}৳</span></p>
+                        {% else %}
+                        <p>{{ product.market_price }}৳</p>
+                        {% endif %}
+                        <a href="{% url 'store:product-detail' product.slug %}">
+                            <button class="btn__styled">View Details</button>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center">
+            <h5 class="fw-bold">No product to show!</h5>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Pagination starts -->
+{% if products %}
+<div class="container my-5">
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a class="btn btn-outline-success" href="?page=1">&laquo; First</a>
+            {% endif %}
+
+            <span class="mx-2 align-top">
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3"  %}
+                <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+            </span>
+
+            {% if page_obj.has_next %}
+            <a class="btn btn-outline-success" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endif %}
+<!-- Pagination ends -->
+
+{% endblock %}

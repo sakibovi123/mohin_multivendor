@@ -1,0 +1,107 @@
+{% extends "store/base.html" %}
+
+{% load mathfilters %}
+
+{% load static %}
+
+{%  block content %}
+
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+
+{% if request.GET.query %}
+    <div class="container my-5">
+        <h5 class="text-muted mb-5">You searched for &quot;{{ request.GET.query }}&quot;</h5>
+
+        <!-- Searched products starts -->
+        {% if products %}
+            <div class="shop__content">
+                <div class="shop__productContainer">
+                    {% for product in page_obj %}
+                    <div class="card product__card">
+                        <div class="product__img">
+                            <a href="{% url 'store:product-detail' product.slug %}">
+                                <img src="{{ product.img.url }}" alt="">
+                            </a>
+                        </div>
+
+                        <div class="product__info card-body mb-2">
+                            <!-- Product description starts -->
+                            {% if product.description %}
+                                <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                                    <p class="product__description text-muted">{{ product.description }}</p>
+                                </a>
+                            {% endif %}
+                            <!-- Product description ends -->
+
+                            <!-- Product title starts -->
+                            <a class="text-dark" href="{% url 'store:product-detail' product.slug %}">
+                                <h5 class="product__title">{{ product.title }}</h5>
+                            </a>
+                            <!-- Product title ends -->
+
+                            <!-- Product discount badge starts -->
+                            {% if product.sale_price %}
+                                <h5><span class="badge bg-danger discount__badge">{{ product.sale_price|div:product.market_price|mul:100|sub:100|abs|slugify|slice:":2" }}% OFF</span></h5>
+                            {% endif %}
+                            <!-- Product discount badge ends -->
+                        </div>
+                        <div class="product__bottom card-footer">
+                            {% if product.sale_price %}
+                                <p><span class="cross__price">{{ product.market_price }}৳</span> <span>{{ product.sale_price }}৳</span></p>
+                            {% else %}
+                                <p>{{ product.market_price }}৳</p>
+                            {% endif %}
+                                <a href="{% url 'store:product-detail' product.slug %}">
+                                    <button class="btn__styled">View Details</button>
+                                </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        <!-- Searched products ends -->
+        {% else %}
+            <!-- No product to show starts -->
+            <div class="text-center">
+                <h5 class="fw-bold">No result found!</h5>
+            </div>
+            <!-- No product to show ends -->
+        {% endif %}
+    </div>
+
+    <!-- Pagination starts -->
+    {% if products %}
+    <div class="container my-5">
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-outline-success" href="?query={{ request.GET.query }}&page=1">&laquo; First</a>
+                {% endif %}
+
+                <span class="mx-2 align-top">
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <a class="btn btn-success mb-4" href="?query={{ request.GET.query }}&page={{ num }}">{{ num }}</a>
+                        {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3"  %}
+                            <a class="btn btn-outline-success mb-4" href="?query={{ request.GET.query }}&page={{ num }}">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-outline-success" href="?query={{ request.GET.query }}&page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    {% endif %}
+    <!-- Pagination ends -->
+{% else %}
+
+<div class="container my-5 text-center">
+    <h4 class="text-muted">Nothing to show!</h4>
+</div>
+
+{% endif %}
+
+{% endblock %}

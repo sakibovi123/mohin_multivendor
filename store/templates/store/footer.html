@@ -1,0 +1,141 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+<footer class="footer footer-inverse">
+    <div class="footer-top pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-4 col-xl-3 mb-4 text-center text-xl-left">
+                                        <a href="{% url 'store:home' %}" class="d-block">
+                                                    <img loading="lazy" src="{% static 'logo_img/logo.png' %}" class="" height="100">
+                                            </a>
+                    <p class="mt-3">Biggest Online Mega Mall</p>
+                    <p style="color: #555555;">Your shop address<br> Email: example@gmail.com<br> Phone: XXXXXXXXXXX</p>
+                    <!-- <ul class="my-3 my-md-0 social-nav model-2">
+                            <li>
+                                <a href="https://www.facebook.com/adyanmart" class="facebook" target="_blank" data-toggle="tooltip" data-original-title="Facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                    </ul> -->
+                </div>
+                <div class="col-xl-2 col-md-4 mb-4">
+                    <h4 class="border-bottom pb-3 mb-4 h6 strong-700">Useful links</h4>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#" class="fs-15">
+                                Privacy policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="fs-15">
+                                Terms &amp; Condition
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="fs-15">
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a class="fs-15" href="#">
+                                FAQ
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-2 col-md-4 mb-4">
+                    <h4 class="border-bottom pb-3 mb-4 h6 strong-700">Policy</h4>
+                    <ul class="footer-links">
+                        <li>
+                            <a class="fs-15" href="#">
+                                Seller Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a class="fs-15" href="#">
+                                Return Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a class="fs-15" href="#">
+                                Support Policy
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-2 col-md-4 mb-4">
+                    <h4 class="border-bottom pb-3 mb-4 h6 strong-700">My account</h4>
+                    <ul class="footer-links">
+                        <li>
+                            <a class="fs-15" href="#">
+                                Login
+                            </a>
+                        </li>
+                        <li>
+                            <a class="fs-15" href="#">
+                                Order History
+                            </a>
+                        </li>
+                        <li>
+                            <a class="fs-15" href="{% url 'store:wishlist' %}">
+                                My Wishlist
+                            </a>
+                        </li>
+                        <li>
+                            <a class="fs-15" href="#">
+                                Track Order
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xxl-2 col-xl-3">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-6">
+                            <div class="mb-4">
+                                <h4 class="border-bottom pb-3 mb-4 h6 strong-700">Mobile Apps</h4>
+                                <!-- <div class="row gutters-10">
+                                    <div class="col">
+                                        <a href="https://play.google.com/store/apps/details?id=com.adyanmart.adyanmart_app" target="_blank" title="Download Android App">
+                                            <img src="https://adyanmart.com.bd/public/img/play.png" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" data-toggle="modal" data-target="#ios-coming" title="Download iOS App">
+                                            <img src="https://adyanmart.com.bd/public/img/app.png" class="img-fluid">
+                                        </a>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <!-- <div class="row gutters-10 mb-3">
+                            <div class="col-3">
+                                <img src="https://adyanmart.com.bd/public/frontend/images/bd.jpeg" class="img-fluid">
+                            </div>
+                            <div class="col-7">
+                                <img src="https://adyanmart.com.bd/public/frontend/images/esdp.jpeg" class="img-fluid">
+                            </div>
+                        </div> -->
+
+                        <div class="col-xl-12 col-md-6">
+                            <div class="">
+                                <h4 class="border-bottom pb-3 mb-4 h6 strong-700">Payment methods</h4>
+                                <img class="img-fluid" src="{% static 'background_images/payment.png' %}" height="40">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom py-3">
+        <div class="container">
+            <div class="text-center">
+                <p class="mb-0 fs-15">&copy; Mustaqeem Limited</p>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,38 @@
+.footer {
+    margin-top: 8rem;
+    background-color: var(--white-primary);
+    padding-top: 3rem;
+}
+
+.footer p {
+    font-family: var(--roboto);
+}
+
+.footer-links {
+    padding-left: 0;
+}
+
+.border-bottom,
+.footer-links li a {
+    font-family: var(--roboto);
+}
+
+.border-bottom {
+    font-weight: 600;
+}
+
+.footer-links li {
+    padding: 4px 0;
+}
+
+.footer-links li a {
+    color: var(--muted-primary);
+}
+
+.footer-links li a:hover {
+    color: var(--dark-gray);
+}
+
+.footer .footer-bottom {
+    background: var(--muted-gray);
+}

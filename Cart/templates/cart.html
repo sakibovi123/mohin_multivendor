@@ -1,0 +1,407 @@
+ {% extends "store/base.html" %}
+ {% load static %}
+ {% block content %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+	<script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    {% comment %} CSS links  {% endcomment %}
+
+    <link href="{% static '/css/cart.css' %}" rel="stylesheet">
+
+
+    <style type="text/css">
+
+        .box{
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        b{
+            font-size: 14px;
+        }
+
+        @media screen and (max-width: 480px){
+            .checkout{
+                width: 100%;
+            }
+
+            .cart{
+                width: 100%;
+                
+            }
+        }
+
+        .plusButton{
+            border: none;
+            border-radius: 15px;
+        }
+
+        .plusButton:hover{
+            background-color: #5f99f5;
+        }
+
+        .minusButton{
+            border: none;
+            border-radius: 15px;
+        }
+
+        .minusButton:hover{
+            background-color: #5f99f5;
+        }
+
+        .delete:hover{
+            color: red;
+        }
+
+    </style>
+
+
+    <body>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-8 cart">
+                    <div id="productApp">
+                        
+                   
+                    <table class="table bg-white mt-4">
+                        <thead class="">
+                            <tr>
+                              <th scope="col">Product Image</th>
+                              <th scope="col">Product Name</th>
+                              <th scope="col">Product Price</th>
+                              <th scope="col">Quantity</th>
+                              <th scope="col">Total Price</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr v-for="product in products">
+                                  <td><img :src="product.thumbnail" alt="" height=50 width=120></td>
+                                  <td>[[product.title]]</td>
+                                  <td v-if="product.sale_price">[[product.sale_price]] $</td><td v-else="product.market_price">[[product.market_price]] $</td>
+                                  <td>
+                                    <button class="plusButton" @click="plusButton(product.id, product.quantity)">+</button>
+                                        [[product.quantity]]
+                                    <button class="minusButton" @click="minusButton(product.id, product.quantity)">-</button>
+                                  </td>
+                                  <td>[[product.total_price]] $</td>
+                                  <td><button @click="removeProduct(product.id)" style="border:none;background:#fff"><span class="iconify delete" data-icon="ant-design:delete-outlined" data-inline="false"></span></button></td>
+                              </tr>
+                          
+                          </tbody>
+                    </table>
+                   
+                   <br>
+                   </div>
+                </div>
+                <div class="col-6 col-md-4 checkout">
+                    <div class="box">
+                        <buttton type="submit" class="confirm-button btn btn-primary col-lg-9" style="margin-right:39px"  data-bs-toggle="modal" data-bs-target="#exampleModal">continue shipping</buttton>
+                        <hr class="col-10">
+                        <div class="row mt-2">
+                            <div class="col-6">ITEM</div>
+                            <div class="col-4 badge bg-success">{{cart.get_total_length}}</div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">Shipping</div>
+                            <div class="col-4">Free</div>
+                        </div>
+                        <hr class="col-10">
+                        <div class="row mt-2">
+                            <div class="col-6"><b>Total</b></div>
+                            <div class="col-4">{{cart.get_total_cost}} $</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Modal -->
+
+        <div id="checkoutApp">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Checkout Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   <form v-on:submit.prevent="submitForm()">
+                        <div class="mb-3">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="first_name" v-model="first_name" required>
+
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" v-model="last_name" required>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" v-model="email" required>
+                        </div>
+                       <div class="mb-3">
+                            <label class="form-label">Address</label>
+                           <textarea type="text" class="form-control" name="address" v-model="address" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Zipcode</label>
+                            <input type="text" class="form-control" name="zipcode" v-model="zipcode" required>
+
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <input type="text" class="form-control" name="city" v-model="city" required>
+
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                            <label class="form-check-label" for="exampleCheck1"><a href="">Terms & conditions</a></label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Confirm Order</button>
+                        </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    </body>
+	
+
+
+	<script>
+		var productsApp = new Vue({
+            el: "#productApp",
+            delimiters: ["[[", "]]"],
+            store: store,
+            data() {
+
+                return {
+                    products: [{{productString|safe}}]
+                }
+
+            },
+
+            mounted() {
+                console.log("Mounted & Loaded");
+            },
+
+            computed: {
+                numItems: function() {
+                    return store.state.numItems
+                }
+            },
+
+
+            methods: {
+                plusButton(product_id, quantity) {
+                    console.log('product_id: ', product_id);
+
+                    var data = {
+                        'product_id': product_id,
+                        'update': true,
+                        'quantity': parseInt(quantity) + 1,
+                    };
+
+
+                    store.commit('increament', 1);
+
+                    fetch('/api/api_add_to_cart/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(data)
+                })
+
+                .then((response) => {
+                    console.log(response);
+
+                    for(var i = 0; i < this.products.length; i++){
+                        var product = this.products[i]
+
+                        if(product.id === product_id){
+                            if(product.sale_price){
+                                this.products[i].quantity = parseInt(this.products[i].quantity) + 1
+                                this.products[i].total_price = parseInt(this.products[i].quantity) * parseInt(this.products[i].sale_price)
+                            }
+                            else{
+                                this.products[i].quantity = parseInt(this.products[i].quantity) + 1
+                                this.products[i].total_price = parseInt(this.products[i].quantity) * parseInt(this.products[i].market_price)
+                            }
+
+                        }
+                    }
+                })
+
+                .catch(function (error) {
+                    console.log("Error 2");
+                    console.log(error)
+                })
+
+                },
+
+                // Minus Button Functions//
+
+            minusButton(product_id, quantity){
+                console.log('product_id:', product_id);
+                var data = {
+                    'product_id': product_id,
+                    'update': true,
+                    'quantity': parseInt(quantity) - 1,
+                };
+                store.commit('increament', -1);
+                fetch('/api/api_add_to_cart/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    console.log(response);
+
+                    for(var i = 0; i < this.products.length; i++){
+                        var product = this.products[i]
+
+                        if(product.id === product_id){
+                            if(product.market_price){
+                                this.products[i].quantity = parseInt(this.products[i].quantity) - 1
+                                this.products[i].total_price = parseInt(this.products[i].quantity) * parseInt(this.products[i].market_price)
+                            }
+                            else{
+                                this.products[i].quantity = parseInt(this.products[i].quantity) - 1
+                                this.products[i].total_price = parseInt(this.products[i].quantity) * parseInt(this.products[i].sale_price)
+                            }
+
+
+                        }
+                    }
+                })
+
+                .catch(function (error) {
+                    console.log("Error 2");
+                    console.log(error)
+                })
+            },
+
+
+
+            //  Remove Button //
+
+
+            removeProduct(product_id) {
+
+                console.log(product_id)
+                 var data = {'product_id': product_id};
+
+                 fetch('/api/api_remove_from_cart/', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json',
+                         'X-CSRFToken': '{{ csrf_token }}',
+                     },
+                     credentials: 'same-origin',
+                     body: JSON.stringify(data)
+                 })
+                 .then((response) => {
+                     console.log(response)
+                     this.products = this.products.filter(product => product.id !== product_id)
+                 })
+                 .catch(function (error) {
+                     console.log(error)
+                 })
+
+            }
+
+            },
+
+        });
+	</script>
+
+		
+    <script>
+        var checkoutApp = new Vue({
+            el: "#checkoutApp",
+            delimiters: ["[[", "]]"],
+
+            data() {
+                return {
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    address: '',
+                    zipcode: '',
+                    city: '',
+                    products: [{{productString|safe}}]
+                }
+            },
+            mounted(){
+                console.log("Checkout Form Ok !");
+            },
+
+            methods: {
+                submitForm(){
+                    console.log("Checkout Form ok!");
+
+                    var data = {
+                        first_name: this.first_name,
+                        last_name: this.last_name,
+                        email: this.email,
+                        address: this.address,
+                        zipcode: this.zipcode,
+                        city: this.city
+                    };
+
+                    console.log("datas:", data);
+
+                    fetch('/api/api_checkout/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+
+                        credentials: 'same-origin',
+                        body: JSON.stringify(data)
+                    })
+
+                        .then((response) =>  {
+                        console.log("Success");
+                        console.log(response);
+
+                        window.location.href = '/';
+
+                        })
+                        .catch(function (error) {
+                        console.log("Error Number 2");
+                        })
+                },
+            },
+        });
+    </script>
+
+
+
+
+ {% endblock %}

@@ -1,0 +1,99 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/manage_profile.css' %}">
+
+<div class="container my-5">
+    <div class="dashboard__content">
+        <!-- Dashboard sidebar starts -->
+        <div class="dashboard__sidebar">
+            <div class="card dashboard__card py-3">
+                <div class="dashboard__topContent">
+                    <span class="iconify dashboardUser__icon" data-icon="gridicons:user-circle" data-inline="false"></span>
+                    <h5 class="fw-bold">{{user.username}}</h5>
+                </div>
+                <div class="sidebar-widget-title py-0">
+                    <span>Menu</span>
+                </div>
+
+                <!-- Dashboard sidebar links starts -->
+                <div class="dashboard__links">
+                    <ul>
+                        <a class="text-muted" href="{% url 'store:dashboard' %}">
+                            <li>
+                                <span class="iconify icon" data-icon="clarity:dashboard-line" data-inline="false"></span> Dashboard
+                            </li>
+                        </a>
+                        <a class="text-muted" href="{% url 'store:wishlist' %}">
+                            <li>
+                                <span class="iconify" data-icon="ant-design:heart-outlined" data-inline="false"></span> Wishlist
+                            </li>
+                        </a>
+                        <a class="text-muted" href="{% url 'store:profile' %}">
+                            <li class="activeDash">
+                                <span class="iconify" data-icon="carbon:user" data-inline="false"></span> Manage Profile
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <!-- Dashboard sidebar links ends -->
+
+            <!-- Dashboard logout button starts -->
+            <a class="w-100 btn btn-block btn-danger logout__btn" href="{% url 'store:logout' %}">Logout</a>
+            <!-- Dashboard logout button ends -->
+        </div>
+        <!-- Dashboard sidebar ends -->
+
+        <!-- Dashboard right side content starts -->
+        <div class="profile__content">
+            <div class="profile__header mb-2">
+                <h5>Manage Profile</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="text-dark" href="{% url 'store:home' %}"><small>Home</small></a></li>
+                        <li class="breadcrumb-item"><a class="text-dark" href="{% url 'store:dashboard' %}"><small>Dashboard</small></a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><small>Manage Profile</small></li>
+                    </ol>
+                </nav>
+            </div>
+            <form>
+                <div class="profile__form">
+                    <div class="card profile__card p-3">
+                        <h6 class="fw-bold">Basic Profile</h6>
+                        <hr>
+                            <div class="mb-3">
+                                <small><label for="username" class="form-label">Your Name</label></small>
+                                <input type="text" class="form-control" id="username" value="{{ request.user.username }}" placeholder="Your Username" required>
+                            </div>
+                            <div class="mb-3">
+                                <small><label for="email" class="form-label">Your Email</label></small>
+                                <input type="email" class="form-control" id="email" disabled placeholder="Your Email" value="{{ request.user.email }}" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="mb-3">
+                                <small><label class="form-label" for="photo">Photo</label></small>
+                                <input type="file" class="form-control" id="photo">
+                            </div>
+                            <div class="mb-3">
+                                <small><label class="form-label" for="password1">Your Password</label></small>
+                                <input type="password" class="form-control" id="password1" placeholder="New Password">
+                            </div>
+                            <div class="mb-3">
+                                <small><label class="form-label" for="password2">Confirm Password</label></small>
+                                <input type="password" class="form-control" id="password2" placeholder="Confirm New Password">
+                            </div>
+                    </div>
+                </div>
+                <div class="update__btn">
+                    <button type="submit">Update Profile</button>
+                </div>
+            </form>
+        </div>
+        <!-- Dashboard right side content ends -->
+    </div>
+</div>
+
+{% endblock %}
