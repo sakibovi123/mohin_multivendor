@@ -63,6 +63,7 @@ def api_checkout(request):
     if paid == True:
         order = Order.objects.get(pk=orderId)
         order.paid = True
+        order.status = True
         order.paid_amount = cart.get_total_cost()
 
         order.save()

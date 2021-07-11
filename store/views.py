@@ -13,7 +13,15 @@ from django.contrib.auth import login, logout, authenticate
 def homeView(request):
     campaigns, offers, shops = None, None, None
     categories = Category.objects.filter(parent=None).order_by("-id")
-    main_navbarCat = Category.objects.all().order_by("-id")[:6]
+    main_navbarCat = Category.objects.filter().order_by("-id")[:6]
+    print(main_navbarCat)
+
+
+    # category = Category.objects.all()
+
+    # print(category)
+
+
     shop_obj = Shop.objects.all()
     campaign_obj = Campaign.objects.all()
     offer_obj = Offer.objects.all()

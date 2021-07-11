@@ -15,6 +15,7 @@ class Order(models.Model):
     
     city = models.CharField(max_length=100, null=True)
     paid = models.BooleanField(default=False)
+    status = models.BooleanField(default=False, null=True, blank=True)
     paid_amount = models.FloatField(blank=True, null=True)
 
     def __str__(self):
@@ -29,4 +30,4 @@ class OrderItems(models.Model):
     quantity = models.IntegerField(default=1)
     
     def __str__(self):
-        return str(self.id)
+        return str(self.order)

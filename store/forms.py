@@ -7,7 +7,7 @@ from django import forms
 from store.models import *
 
 
-class UserRegistrationForm(ModelForm):
+class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'email', 'password1', 'password2']

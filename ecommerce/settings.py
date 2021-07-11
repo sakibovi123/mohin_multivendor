@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'Cart',
     'order',
-    'crispy_forms'
+    'crispy_forms',
+    'rest_framework',
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 

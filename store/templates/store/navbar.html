@@ -147,7 +147,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="iconify ellipsis" data-icon="uil:ellipsis-v" data-inline="false"></span>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li class="py-1"><a class="dropdown-item" href="#">All Shops</a></li>
                     <li class="py-1"><a class="dropdown-item" href="{% url 'store:brands' %}">All Brands</a></li>
                     <li class="py-1"><a class="dropdown-item" href="{% url 'store:campaigns' %}">Campaigns</a></li>
@@ -155,7 +155,7 @@
                     <li class="py-1"><a class="dropdown-item" href="{% url 'store:localshop' %}">Mustaqeem Localshop</a></li>
                     <li class="py-1"><a class="dropdown-item" href="{% url 'store:flash-sale' %}">Flash Sale</a></li>
                     <li class="py-1"><a class="dropdown-item" href="#">COD Shops</a></li>
-                </ul>
+                </ul> -->
             </li>
         </ul>
     </nav>
@@ -182,7 +182,7 @@
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
             <li class="nav-item top__header">
-                <a class="nav-link" href="#"><small>Track Order</small></a>
+                <a class="nav-link" href="{% url 'store:dashboard' %}"><small>Track Order</small></a>
             </li>
             <li class="nav-item cart__header me-2">
                 <a href="{% url 'cart_details' %}">
@@ -313,7 +313,7 @@
 
 <!-- Header after slider starts -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light d-flex justify-content-center header__afterSlider">
-    <ul class="navbar-nav mb-2 mb-lg-0">
+    <!-- <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item after__slider">
             <a class="nav-link" href="#">All Shops</a>
         </li>
@@ -332,7 +332,7 @@
         <li class="nav-item after__slider">
             <a class="nav-link" href="#">COD Shops</a>
         </li>
-    </ul>
+    </ul> -->
 </nav>
 <!-- Header after slider starts -->
 
